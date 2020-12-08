@@ -1,7 +1,6 @@
 {
-  "name": "react-bolt",
+  "name": "@le_hoang6799/react-bolt",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "jest": {
     "preset": "ts-jest",
@@ -33,7 +32,7 @@
     "test:cover": "npm run test --coverage"
   },
   "keywords": [],
-  "author": "",
+  "author": "lehoang",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -115,5 +114,14 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jc578271/create-react-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jc578271/create-react-app/issues"
+  },
+  "homepage": "https://github.com/jc578271/create-react-app#readme",
+  "description": ""
 }
