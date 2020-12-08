@@ -1,24 +1,27 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from 'redux/reducers'
 import { auth } from '../redux/actions/user'
 
+interface Props {
+
+}
+
 export default (ComposedClass: any, reload: boolean | null, adminRoute = null) => {
-    class AuthenticationCheck extends Component {
-
+    class AuthenticationCheck extends Component<PropsT> {
         componentDidMount(){
-            this.props.dispatch(auth()).then((response: any) => {
+            this.props.dispatch(auth()).payload.then(() => {
                 let user = this.props.user.userData
-
                 if(!user.isAuth) {
                     if(reload) {
-                        this.props.history.push('/register_login')
+                        this.props.history.push('/')
                     }
                 } else {
                     if(adminRoute && !user.isAdmin) {
-                        this.props.history.push('/user/dashboard')
+                        this.props.history.push('/sign_in')
                     } else {
                         if (reload === false) {
-                            this.props.history.push('/user/dashboard')
+                            this.props.history.push('/sign_in')
                         }
                     }
                 }
@@ -34,11 +37,15 @@ export default (ComposedClass: any, reload: boolean | null, adminRoute = null) =
         }
     }
 
-    const mapStateToProps = (state: any) => {
-        return {
-            user: state.user
-        }
-    }
+    const mapStateToProps = (state: RootState) => ({
+        user: state.user
+    })
     
+    const connector = connect(mapStateToProps)
+    type PropsFromRedux = ConnectedProps<typeof connector>
+    type PropsT = Props & PropsFromRedux & ReturnType<typeof mapStateToProps> & {
+        history: any
+    }
+
     return connect(mapStateToProps)(AuthenticationCheck)
 }
