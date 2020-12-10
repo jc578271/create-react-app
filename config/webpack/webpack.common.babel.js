@@ -8,7 +8,11 @@ import rules from './rules';
 
 module.exports = {
     entry: paths.entryPath,
-    module: { rules },
+    module: { 
+        rules: [
+            ...rules(MiniCssExtractPlugin),
+        ] 
+    },
     resolve: {
         modules: ['src', 'node_modules'],
         extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.scss']

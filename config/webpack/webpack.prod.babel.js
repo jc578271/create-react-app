@@ -1,17 +1,13 @@
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 
 import paths from './paths';
-import rules from './rules';
 
 module.exports = {
     mode: 'production',
     output: {
-        filename: `${paths.jsFolder}/[name].[hash].js`,
+        filename: `${paths.jsFolder}/[name].js`,
         path: paths.outputPath,
-        chunkFilename: '[name].[chunkhash].js'
-    },
-    module: {
-        rules
+        chunkFilename: '[name].js'
     },
     plugins: [
         new CleanWebpackPlugin()

@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 
 import paths from './paths';
-import rules from './rules';
 
 module.exports = {
     mode: 'development',
@@ -10,9 +9,6 @@ module.exports = {
         path: paths.outputPath,
         chunkFilename: '[name].js',
         publicPath: '/'
-    },
-    module: {
-        rules
     },
     optimization: {
         splitChunks: {

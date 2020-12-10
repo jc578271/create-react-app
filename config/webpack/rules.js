@@ -1,11 +1,8 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import postcssImport from 'postcss-import'
-import postcssPresetEnv from 'postcss-preset-env'
 import cssnano from 'cssnano'
 
 const devMode = process.env.NODE_ENV !== 'production'
 
-module.exports = [
+export default (MiniCssExtractPlugin) => [
     {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -29,15 +26,17 @@ module.exports = [
         test: /\.s?css$/i,
         use: [
             { loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader },
-            { loader: 'css-loader', options: { sourceMap: !devMode } },
+            { loader: 'css-loader', options: { sourceMap: !devMode, modules: true } },
             {
                 loader: 'postcss-loader',
                 options: {
                     sourceMap: true,
-                    plugins: () => [postcssImport, postcssPresetEnv, cssnano],
-                },
-            },
-            { loader: 'sass-loader', options: { sourceMap: true } }
+                    postcssOptions: {
+                        plugins: ["postcss-preset-env", "postcss-import", cssnano]
+                    }
+                }
+            }
+            // { loader: 'sass-loader', options: { sourceMap: true } }
         ]
     },
     {
